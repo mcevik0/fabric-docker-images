@@ -21,6 +21,8 @@ services:
             pip install nbresuse
             start-notebook.sh --ServerApp.token=''
     restart: always
+    networks:
+      - jupyter
   fabric-bleeding:
     image: fabrictestbed/jupyter-notebook:1.8.0
     container_name: fabric-bleeding
@@ -44,6 +46,8 @@ services:
             pip install nbresuse
             start-notebook.sh --ServerApp.token=''
     restart: always
+    networks:
+      - jupyter
   fabric-beyond-bleeding:
     image: fabrictestbed/jupyter-notebook:1.8.0
     container_name: fabric-beyond-bleeding
@@ -72,3 +76,13 @@ services:
             pip install nbresuse
             start-notebook.sh --ServerApp.token=''
     restart: always
+    networks:
+      - jupyter
+networks:
+  jupyter:
+    enable_ipv6: true
+    enable_ipv4: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 2001:db8::/64
